@@ -36,7 +36,7 @@ body {
 }
 ```
 
-![App Screenshot](https://paste.pics/67c1a37f9a9cf637fce5eefd474a94b6)
+![App Screenshot](https://i2.paste.pics/2ed0aa0ef608936256ad59fa6e391918.png)
 
 2. /api/v1/payment
 
@@ -47,12 +47,12 @@ body{
 "amount":0
 }
 ```
-![App Screenshot](https://paste.pics/80b8af860efe4ecf7b5d241dad59a4cf)
+![App Screenshot](https://i2.paste.pics/f3c1b78c91cbebbcf1711515699e03d2.png)
 
-![App Screenshot](https://paste.pics/a8607cb9879fe10daaacdf869ebc8375)
+![App Screenshot](https://i2.paste.pics/2e26141f0e4cde0164ecc58fb37ff341.png)
 
 3. /api/v1/logout
 ```bash
 Need jwt token from login, just paste at header Authorization and value is token (no need to add bearer in beginning of token)
 ```
-![App Screenshot](https://paste.pics/839cf607d3f8d623220cb732d5b05921)
+![App Screenshot](https://i2.paste.pics/eba7ea70ea317be4e57c5e387530f949.png)
