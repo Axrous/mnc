@@ -1,0 +1,20 @@
+[
+	{
+		"id": "1",
+		"name": "Arga Satya M",
+		"password": "123",
+		"username": "argasm"
+	},
+	{
+		"id": "1",
+		"name": "Gina Mutmainah",
+		"username": "gina99",
+		"password": "123"
+	},
+	{
+		"id": "3",
+		"name": "Raga Baskara",
+		"username": "raga",
+		"password": "123"
+	}
+]
