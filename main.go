@@ -4,31 +4,21 @@ import (
 	"net/http"
 
 	"github.com/Axrous/mnc/app"
-	"github.com/Axrous/mnc/controller"
 	"github.com/Axrous/mnc/exception"
+	"github.com/Axrous/mnc/manager"
 	"github.com/Axrous/mnc/middleware"
-	"github.com/Axrous/mnc/repository"
-	"github.com/Axrous/mnc/service"
-	"github.com/julienschmidt/httprouter"
 )
 
 func main()  {
 	
 	db := app.NewDB()
-	router := httprouter.New()
-
-
-	customerRepository := repository.NewCustomerRepository(db)
-	whitelistRepository := repository.NewWhiteListRepository(db)
-	transactionRepository := repository.NewTransactionRepository(db)
-
-	customerService := service.NewCustomerService(customerRepository, whitelistRepository)
-	transactionService := service.NewTransactionService(transactionRepository, whitelistRepository)
-
-	router.PanicHandler = exception.ErrorHandler
-	controller.NewCustomerController(customerService, router).Route()
-	controller.NewTransactionController(transactionService, router).Route()
 	
+	repositoryManager := manager.NewRepositorymanager(db)
+	serviceManager := manager.NewServiceManager(repositoryManager)
+	controllerManager := manager.NewControllerManager(serviceManager)
+	
+	router := app.NewRouter(controllerManager)
+	router.PanicHandler = exception.ErrorHandler
 	handler := middleware.NewLoggerMiddleware(middleware.NewAuthMiddleware(router))
 	
 	// handler := ex

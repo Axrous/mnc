@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/Axrous/mnc/helper"
 	"github.com/Axrous/mnc/model/web"
 	"github.com/Axrous/mnc/service"
 	"github.com/julienschmidt/httprouter"
 )
 
-type transactionController struct {
-	service service.TransactionService
-	router *httprouter.Router
+type TransactionController interface{
+	Payment(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 }
 
-func (controller *transactionController) Route() {
-	controller.router.POST("/api/v1/payment", controller.Payment)
+type transactionController struct {
+	service service.TransactionService
 }
 
 func (controller *transactionController) Payment(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -33,18 +33,12 @@ func (controller *transactionController) Payment(writer http.ResponseWriter, req
 		Code:   201,
 		Status: "CREATED",
 	}
-
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err = encoder.Encode(webResponse)
-	if err != nil {
-		panic(err)
-	}
+	writer.WriteHeader(http.StatusCreated)
+	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func NewTransactionController(service service.TransactionService, router *httprouter.Router) *transactionController {
+func NewTransactionController(service service.TransactionService) TransactionController {
 	return &transactionController{
 		service: service,
-		router:  router,
 	}
 }

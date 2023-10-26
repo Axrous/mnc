@@ -7,6 +7,8 @@ This is for test mnc
 - Using uuid for generate id, logrus for logging, simdb for json file database
 - Have 3 Endpoint (Login, Payment, Logout).
 
+In this clean architecture has several layers, namely the repository, service and controller. the repository performs a relationship with the json file, then for the service performs logic such as checking whether the customer has logged in or logged out and the controller receives a request from the client and provides a response. for the sequence, the user sends data to the endpoint and then the controller receives it after that the controller calls the service according to its method and the service calls the repository for the data.
+
 ## Instalation
 this project requires [Go](https://golang.org/) v1.20+ to run.
 

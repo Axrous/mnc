@@ -17,10 +17,6 @@ func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interfa
 		return
 	}
 
-	// if validationError(writer, request, err) {
-	// 	return
-	// }
-
 	internalServerError(writer, request, err)
 }
 

@@ -10,19 +10,19 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-type customerController struct {
+type CustomerController interface{
+	CreateUser(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
+	GetCustById(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
+	Login(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
+	Logout(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
+}
+
+type customerControllerImpl struct {
 	service service.CustomerService
-	router *httprouter.Router
 }
 
-func (controller *customerController) Route() {
-	controller.router.POST("/api/v1/register", controller.CreateUser)
-	controller.router.GET("/api/v1/customers/:id", controller.GetCustById)
-	controller.router.POST("/api/v1/login", controller.Login)
-	controller.router.POST("/api/v1/logout", controller.Logout)
-}
 
-func (controller *customerController) CreateUser(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *customerControllerImpl) CreateUser(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	
 	var customerCreateRequest web.CustomerCreateRequest
 	decoder := json.NewDecoder(request.Body)
@@ -46,7 +46,7 @@ func (controller *customerController) CreateUser(writer http.ResponseWriter, req
 	}
 }
 
-func (controller *customerController) GetCustById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *customerControllerImpl) GetCustById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userId := params.ByName("id")
 
 	customer := controller.service.FindById(request.Context(), userId)
@@ -65,7 +65,7 @@ func (controller *customerController) GetCustById(writer http.ResponseWriter, re
 	}
 }
 
-func (controller *customerController) Login(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *customerControllerImpl) Login(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	
 	var customerLoginRequest web.CustomerLoginRequest
 	decoder := json.NewDecoder(request.Body)
@@ -85,7 +85,7 @@ func (controller *customerController) Login(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (controller *customerController) Logout(writer http.ResponseWriter, request *http.Request, params httprouter.Params)  {
+func (controller *customerControllerImpl) Logout(writer http.ResponseWriter, request *http.Request, params httprouter.Params)  {
 	
 	controller.service.Logout(request.Context())
 	webResponse := web.WebResponse{
@@ -97,9 +97,8 @@ func (controller *customerController) Logout(writer http.ResponseWriter, request
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func NewCustomerController(service service.CustomerService, router *httprouter.Router) *customerController {
-	return &customerController{
+func NewCustomerController(service service.CustomerService) CustomerController {
+	return &customerControllerImpl{
 		service: service,
-		router:  router,
 	}
 }

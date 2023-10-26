@@ -34,3 +34,6 @@ time="2023-10-25T17:04:07+07:00" level=warning msg="{2023-10-25 17:04:07.9805962
 time="2023-10-25T17:04:09+07:00" level=warning msg="{2023-10-25 17:04:09.7959986 +0700 +07 m=+3758.635585601 0s 401 127.0.0.1:50133 POST /api/v1/logout Thunder Client (https://www.thunderclient.com)}"
 time="2023-10-25T17:04:12+07:00" level=info msg="{2023-10-25 17:04:12.7740616 +0700 +07 m=+3761.613648601 35.9018ms 200 127.0.0.1:50134 POST /api/v1/login Thunder Client (https://www.thunderclient.com)}"
 time="2023-10-25T17:04:36+07:00" level=info msg="{2023-10-25 17:04:36.903122 +0700 +07 m=+3785.742709001 43.9493ms 200 127.0.0.1:50265 POST /api/v1/logout Thunder Client (https://www.thunderclient.com)}"
+time="2023-10-26T12:24:08+07:00" level=info msg="{2023-10-26 12:24:08.470778 +0700 +07 m=+53.504993101 45.2363ms 200 127.0.0.1:49397 POST /api/v1/login Thunder Client (https://www.thunderclient.com)}"
+time="2023-10-26T12:39:01+07:00" level=warning msg="{2023-10-26 12:39:01.8385764 +0700 +07 m=+4.058209201 518.9µs 401 127.0.0.1:49533 POST /api/v1/login Thunder Client (https://www.thunderclient.com)}"
+time="2023-10-26T12:42:35+07:00" level=info msg="{2023-10-26 12:42:35.1830306 +0700 +07 m=+217.402663401 523µs 200 127.0.0.1:49559 POST /api/v1/login Thunder Client (https://www.thunderclient.com)}"
