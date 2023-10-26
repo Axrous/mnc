@@ -32,6 +32,19 @@ To run this app, you can just type command ```go run .``` in root project dir.
 for url ```http://localhost:8080```
 
 ## Try Endpoint
+
+- For account we have data
+
+``` bash
+{
+    "id" : "1",
+    "name": "Arga Satya Mulyono",
+    "username: "argasm",
+    "password":"123"
+}
+```
+
+
 1. /api/v1/login
 ```bash
 body {
